@@ -1,0 +1,63 @@
+# pyproject.toml
+
+[project]
+name = "the-conversion-ground-truth"
+version = "0.1.0"
+description = "Builds the Sales Evaluation Bench and Aligning the Conversion Engine." 
+requires-python = "==3.11.9"
+dependencies = [
+    "accelerate>=1.13.0",
+    "bitsandbytes>=0.49.2",
+    "black>=26.3.1",
+    "datasets>=4.8.5",
+    "evaluate>=0.4.6",
+    "flake8>=7.3.0",
+    "huggingface-hub>=1.12.0",
+    "ipywidgets>=8.1.8",
+    "isort>=8.0.1",
+    "jupyter>=1.1.1",
+    "load-dotenv>=0.1.0",
+    "matplotlib>=3.10.9",
+    "numpy>=2.4.4",
+    "pandas>=3.0.2",
+    "peft>=0.19.1",
+    "pytest>=9.0.3",
+    "safetensors>=0.7.0",
+    "scikit-learn>=1.8.0",
+    "seaborn>=0.13.2",
+    "sentencepiece>=0.2.1",
+    "torch>=2.11.0",
+    "tqdm>=4.67.3",
+    "transformers>=5.6.2",
+    "wandb>=0.26.1",
+]
+
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+skip-string-normalization = false
+
+[tool.isort]
+profile = "black"
+skip = [".venv"]
+
+[tool.flake8]
+max-line-length = 88
+ignore = ["E203", "W503", "E402"]
+exclude = [".venv", "venv", "env"]
+
+[tool.yamllint]
+extends = "default"
+
+[tool.yamllint.rules.truthy]
+level = "warning"
+allowed-values = ["true", "false"]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "isort",
+    "pytest",
+]
+
