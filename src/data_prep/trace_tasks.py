@@ -1,6 +1,8 @@
 # src/data_prep/trace_tasks.py
+
 import json
 from collections import defaultdict
+
 
 def build_trace_tasks(input_file, output_file):
     traces_by_id = defaultdict(dict)
@@ -19,15 +21,22 @@ def build_trace_tasks(input_file, output_file):
                 if t.get("input"):
                     try:
                         inner_input = json.loads(t["input"])
-                    except: pass
+                    except:
+                        pass
                 if t.get("output"):
                     try:
                         inner_output = json.loads(t["output"])
-                    except: pass
+                    except:
+                        pass
 
                 # Prospect inbound email
                 if name == "handle-email-reply":
-                    prospect_text = inner_input.get("kwargs", {}).get("payload", {}).get("data", {}).get("text")
+                    prospect_text = (
+                        inner_input.get("kwargs", {})
+                        .get("payload", {})
+                        .get("data", {})
+                        .get("text")
+                    )
                     intent = inner_output.get("intent", "UNKNOWN")
                     if prospect_text:
                         traces_by_id[tid]["prospect"] = prospect_text
@@ -59,7 +68,7 @@ def build_trace_tasks(input_file, output_file):
             "outreach_body": vals.get("outreach_body"),
             "label": 1 if vals.get("intent") == "INTERESTED_BOOK_MEETING" else 0,
             "failure_mode_tag": "Trace-derived",
-            "metadata": f"TraceId {tid}"
+            "metadata": f"TraceId {tid}",
         }
         # Only add if at least one field is present
         if any([task["prospect_input"], task["agent_output"], task["outreach_body"]]):
@@ -69,6 +78,7 @@ def build_trace_tasks(input_file, output_file):
     print(f"\nTotal tasks created: {len(tasks)}")
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(tasks, f, indent=2)
+
 
 if __name__ == "__main__":
     build_trace_tasks("data/raw/llm_traces.jsonl", "data/tasks/trace_tasks.json")
