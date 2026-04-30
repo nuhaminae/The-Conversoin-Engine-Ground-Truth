@@ -5,19 +5,18 @@ Evaluate the Judge/Critic model on Tenacious Sales Evaluation Benchmark (Path B)
 Uses utils.py for logging/JSON and metrics.py for evaluation metrics.
 """
 
-import os
 import argparse
-import numpy as np
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer
-from datasets import load_dataset
-
-from src.training.train_judge import PreferenceDataset
-from src.training.utils import setup_logger, save_json, timestamp
-from src.evaluation.metrics import compute_classification_metrics, plot_confusion_matrix
-
-from dotenv import load_dotenv
 import os
+
+import numpy as np
 import wandb
+from datasets import load_dataset
+from dotenv import load_dotenv
+from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer
+
+from src.evaluation.metrics import compute_classification_metrics, plot_confusion_matrix
+from src.training.train_judge import PreferenceDataset
+from src.training.utils import save_json, setup_logger, timestamp
 
 # Load environment variables
 load_dotenv()
@@ -25,6 +24,7 @@ load_dotenv()
 WANDB_API_KEY = os.getenv("WANDB_API_KEY")
 WANDB_PROJECT = os.getenv("WANDB_PROJECT", "tenacious-judge")
 WANDB_ENTITY = os.getenv("WANDB_ENTITY")
+
 
 def init_wandb(run_name):
     """Initialize W&B if API key is present."""
@@ -36,8 +36,9 @@ def init_wandb(run_name):
         print("⚠️ No WANDB_API_KEY found in .env, skipping W&B logging")
         return False
 
+
 def main(args):
-    
+
     # Initialize W&B
     wandb_enabled = init_wandb("judge-eval-v1")
 
@@ -47,9 +48,12 @@ def main(args):
     tokenizer = AutoTokenizer.from_pretrained(args.model_dir)
     model = AutoModelForSequenceClassification.from_pretrained(args.model_dir)
 
-    dataset = load_dataset("json", data_files={
-        "test": os.path.join(args.data_dir, "heldout.json"),
-    })
+    dataset = load_dataset(
+        "json",
+        data_files={
+            "test": os.path.join(args.data_dir, "heldout.json"),
+        },
+    )
     test_dataset = PreferenceDataset(dataset["test"], tokenizer)
 
     trainer = Trainer(model=model, tokenizer=tokenizer)
@@ -64,12 +68,25 @@ def main(args):
 
     if wandb_enabled:
         wandb.log(results)
-        wandb.log({"judge_confusion_matrix": wandb.Image(os.path.join(args.output_dir, "judge_confusion_matrix.png"))})
+        wandb.log(
+            {
+                "judge_confusion_matrix": wandb.Image(
+                    os.path.join(args.output_dir, "judge_confusion_matrix.png")
+                )
+            }
+        )
 
-    plot_confusion_matrix(preds, labels, args.output_dir,
-                          filename="judge_confusion_matrix.png",
-                          title="Judge Model Confusion Matrix")
-    logger.info(f"Confusion matrix saved to {args.output_dir}/judge_confusion_matrix.png")
+    plot_confusion_matrix(
+        preds,
+        labels,
+        args.output_dir,
+        filename="judge_confusion_matrix.png",
+        title="Judge Model Confusion Matrix",
+    )
+    logger.info(
+        f"Confusion matrix saved to {args.output_dir}/judge_confusion_matrix.png"
+    )
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Evaluate Judge/Critic model")
