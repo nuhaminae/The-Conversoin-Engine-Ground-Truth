@@ -1,4 +1,4 @@
-# 📑 Model Card – Tenacious Judge Model (Path B)
+# Model Card – Tenacious Judge Model (Path B)
 
 ## Model Details
 
@@ -6,7 +6,7 @@
 - **Version:** v1.0  
 - **Architecture:** DistilBERT (fine‑tuned for binary classification)  
 - **Training method:** Preference optimisation with LoRA adapters  
-- **Developed by:** [Your Team Name]  
+- **Developed by:** Nuhamin
 - **Date:** April 2026  
 
 ---
@@ -60,7 +60,6 @@
 
 ## Maintenance
 
-- **Maintainers:** [Your Team Name]  
+- **Maintainers:** Nuhamin A.
 - **Update frequency:** Iterative updates as new failure modes are discovered.  
-- **Contact:** [Your email or GitHub handle]  
-
+- **Contact:** `https://github.com/nuhaminae` 
