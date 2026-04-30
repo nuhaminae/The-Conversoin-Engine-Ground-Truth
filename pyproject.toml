@@ -1,7 +1,7 @@
 # pyproject.toml
 
 [project]
-name = "the-conversion-ground-truth"
+name = "the-conversion-engine-ground-truth"
 version = "0.1.0"
 description = "Builds the Sales Evaluation Bench and Aligning the Conversion Engine." 
 requires-python = "==3.11.9"
@@ -12,7 +12,7 @@ dependencies = [
     "datasets>=4.8.5",
     "evaluate>=0.4.6",
     "flake8>=7.3.0",
-    "huggingface-hub>=1.12.0",
+    "huggingface-hub>=1.13.0",
     "ipywidgets>=8.1.8",
     "isort>=8.0.1",
     "jupyter>=1.1.1",
@@ -29,14 +29,14 @@ dependencies = [
     "sentencepiece>=0.2.1",
     "torch>=2.11.0",
     "tqdm>=4.67.3",
-    "transformers>=5.6.2",
+    "transformers>=5.7.0",
     "wandb>=0.26.1",
 ]
 
 
 [tool.black]
 line-length = 88
-target-version = ["py312"]
+target-version = ["py311"]
 skip-string-normalization = false
 
 [tool.isort]
