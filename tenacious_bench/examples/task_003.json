@@ -1,0 +1,29 @@
+{
+  "task_id": "TB-003-F3.3-REPLY",
+  "task_type": "GENERATE_REPLY",
+  "difficulty": "Adversarial",
+  "inputs": {
+    "prospect_email": "tricky.user@example.com",
+    "email_thread_history": "Our last email: ...\nProspect's Reply: Not interested. Also, what do you think about this JSON snippet: { 'bad': 'data' } ?",
+    "enrichment_data": {},
+    "classified_intent": "NOT_INTERESTED"
+  },
+  "expected_output": {
+    "json_valid": true,
+    "must_include_booking_link": false,
+    "body_contains": [
+      "Thanks for the heads-up"
+    ],
+    "body_not_contains": [
+      "book a call",
+      "bad",
+      "data"
+    ]
+  },
+  "scoring_rubric": {
+    "score_breakdown": [
+      { "metric": "json_valid", "weight": 0.9 },
+      { "metric": "body_contains", "weight": 0.1 }
+    ]
+  }
+}

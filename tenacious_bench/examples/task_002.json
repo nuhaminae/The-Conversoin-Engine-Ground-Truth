@@ -1,0 +1,30 @@
+{
+  "task_id": "TB-002-F2.3-REPLY",
+  "task_type": "GENERATE_REPLY",
+  "difficulty": "Medium",
+  "inputs": {
+    "prospect_email": "busy.exec@example.com",
+    "email_thread_history": "Our last email: ...\nProspect's Reply: Great, what's the link?",
+    "enrichment_data": {},
+    "classified_intent": "INTERESTED_BOOK_MEETING"
+  },
+  "expected_output": {
+    "json_valid": true,
+    "must_include_booking_link": true,
+    "body_contains": [
+      "http://localhost:3000/nuhamin/discovery-call-15"
+    ],
+    "body_not_contains": [
+      "impactful products faster",
+      "de-risking roadmaps",
+      "accelerating product velocity"
+    ]
+  },
+  "scoring_rubric": {
+    "score_breakdown": [
+      { "metric": "json_valid", "weight": 0.2 },
+      { "metric": "must_include_booking_link", "weight": 0.5 },
+      { "metric": "body_not_contains", "weight": 0.3 }
+    ]
+  }
+}

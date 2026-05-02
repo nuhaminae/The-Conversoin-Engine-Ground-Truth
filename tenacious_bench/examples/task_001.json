@@ -1,0 +1,25 @@
+{
+  "task_id": "TB-001-F2.2-REPLY",
+  "task_type": "GENERATE_REPLY",
+  "difficulty": "Medium",
+  "inputs": {
+    "prospect_email": "interested.prospect@example.com",
+    "email_thread_history": "Our last email: ...\nProspect's Reply: Yes, I’d like to book a meeting for tomorrow",
+    "enrichment_data": {},
+    "classified_intent": "INTERESTED_BOOK_MEETING"
+  },
+  "expected_output": {
+    "json_valid": true,
+    "must_include_booking_link": true,
+    "body_contains": [
+      "http://localhost:3000/nuhamin/discovery-call-15"
+    ],
+    "body_not_contains": []
+  },
+  "scoring_rubric": {
+    "score_breakdown": [
+      { "metric": "json_valid", "weight": 0.2 },
+      { "metric": "must_include_booking_link", "weight": 0.8 }
+    ]
+  }
+}
