@@ -1,0 +1,11 @@
+{
+  "accuracy": 0.8076923076923077,
+  "precision": 0.9444444444444444,
+  "recall": 0.6538461538461539,
+  "f1": 0.7727272727272727,
+  "model_type": "deterministic_week10_no_judge_baseline",
+  "num_pointwise_examples": 52,
+  "pairwise_accuracy": 0.6153846153846154,
+  "num_pairs": 26,
+  "correct_pairs": 16
+}
