@@ -1,0 +1,109 @@
+{
+  "task_summary": {
+    "total_candidate_tasks": 436,
+    "task_files": {
+      "trace_tasks": 176,
+      "programmatic_tasks": 102,
+      "synthetic_pairs": 96,
+      "adversarial_cases": 62
+    },
+    "source_mode_counts": {
+      "trace-derived": 176,
+      "programmatic": 102,
+      "multi-LLM synthesis": 96,
+      "hand-authored adversarial": 62
+    },
+    "label_counts": {
+      "1": 218,
+      "0": 218
+    },
+    "failure_code_counts": {
+      "None": 218,
+      "F3.2": 58,
+      "F1.2": 51,
+      "F3.1": 25,
+      "F3.3": 17,
+      "F2.2": 16,
+      "F4.2": 9,
+      "F2.1": 9,
+      "F4.3": 8,
+      "F1.1": 8,
+      "F4.1": 6,
+      "F1.4": 6,
+      "F2.3": 5
+    }
+  },
+  "split_summary": {
+    "total_selected_tasks": 260,
+    "split_counts": {
+      "train": 130,
+      "dev": 78,
+      "held_out": 52
+    },
+    "source_mode_by_split": {
+      "hand-authored adversarial": {
+        "dev": 18,
+        "held_out": 10,
+        "train": 12
+      },
+      "multi-LLM synthesis": {
+        "dev": 18,
+        "held_out": 6,
+        "train": 40
+      },
+      "programmatic": {
+        "dev": 18,
+        "held_out": 14,
+        "train": 46
+      },
+      "trace-derived": {
+        "dev": 24,
+        "held_out": 22,
+        "train": 32
+      }
+    },
+    "label_counts_by_split": {
+      "0": {
+        "dev": 39,
+        "held_out": 26,
+        "train": 65
+      },
+      "1": {
+        "dev": 39,
+        "held_out": 26,
+        "train": 65
+      }
+    }
+  },
+  "pair_integrity": {
+    "dev": {
+      "total_pairs": 39,
+      "complete_pairs": 39,
+      "broken_pairs": 0
+    },
+    "held_out": {
+      "total_pairs": 26,
+      "complete_pairs": 26,
+      "broken_pairs": 0
+    },
+    "train": {
+      "total_pairs": 65,
+      "complete_pairs": 65,
+      "broken_pairs": 0
+    }
+  },
+  "dpo_summary": {
+    "train_dpo": {
+      "pairs": 65,
+      "missing_required_examples": []
+    },
+    "dev_dpo": {
+      "pairs": 39,
+      "missing_required_examples": []
+    },
+    "held_out_dpo": {
+      "pairs": 26,
+      "missing_required_examples": []
+    }
+  }
+}
