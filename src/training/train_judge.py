@@ -17,14 +17,19 @@ Outputs:
   reports/training/training_config_used.yaml
 """
 
-import unsloth
-from unsloth import FastLanguageModel, PatchDPOTrainer, is_bfloat16_supported
+# Disable TensorFlow/Flax paths before Transformers/Unsloth import.
+# This avoids Colab protobuf/TensorFlow import conflicts for PyTorch-only training.
+import os
+os.environ.setdefault("USE_TF", "0")
+os.environ.setdefault("USE_FLAX", "0")
+os.environ.setdefault("TRANSFORMERS_NO_TF", "1")
 
+# IMPORTANT: Unsloth must be imported before trl / transformers / peft.
+from unsloth import FastLanguageModel, PatchDPOTrainer, is_bfloat16_supported
 PatchDPOTrainer()
 
 import argparse
 import json
-import os
 import shutil
 import time
 from pathlib import Path
@@ -35,7 +40,7 @@ import yaml
 from datasets import load_dataset
 from dotenv import load_dotenv
 from huggingface_hub import login
-from trl import DPOConfig, DPOTrainer
+from trl import DPOTrainer, DPOConfig
 
 
 # -----------------------------
@@ -202,7 +207,7 @@ def main(config_path: str) -> None:
         lora_alpha=model_config["lora"]["alpha"],
         lora_dropout=model_config["lora"]["dropout"],
         bias="none",
-        use_gradient_checkpointing=True,
+        use_gradient_checkpointing="unsloth",
         random_state=config.get("seed", 42),
         max_seq_length=data_config["max_length"],
     )
@@ -257,6 +262,7 @@ def main(config_path: str) -> None:
 
     print("Initialising DPOTrainer.")
     try:
+        # Newer TRL versions use processing_class instead of tokenizer.
         dpo_trainer = DPOTrainer(
             model=model,
             ref_model=None,
