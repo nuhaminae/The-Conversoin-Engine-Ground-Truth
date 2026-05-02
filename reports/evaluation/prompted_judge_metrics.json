@@ -1,0 +1,17 @@
+{
+  "accuracy": 0.8846153846153846,
+  "precision": 1.0,
+  "recall": 0.7692307692307693,
+  "f1": 0.8695652173913043,
+  "model_type": "prompt_engineered_base_causal_lm",
+  "base_model": "unsloth/Llama-3.2-1B-Instruct-bnb-4bit",
+  "num_pointwise_examples": 52,
+  "pairwise_accuracy": 1.0,
+  "strict_pairwise_accuracy": 0.7692307692307693,
+  "num_pairs": 26,
+  "rank_correct_pairs": 26,
+  "strict_correct_pairs": 20,
+  "max_length": 1024,
+  "threshold": 0.0,
+  "prompt_template_version": "tenacious_prompted_judge_v1"
+}
