@@ -7,11 +7,13 @@ REM NOTE: Python scripts are responsible for loading .env secrets.
 REM ============================================================
 
 echo [1/5] Preparing datasets...
-REM Ensure you have created all six types of task generation scripts.
+REM Ensure all six types of task generation scripts are present.
 python src\data_prep\trace_tasks.py
 python src\data_prep\programmatic_tasks.py
 python src\data_prep\synthetic_pairs.py
+
 python scripts\summarise_openrouter_costs.py
+
 python src\data_prep\adversarial_cases.py
 python src\data_prep\split_dataset.py
 python src\data_prep\create_preference_pairs.py
