@@ -1,0 +1,35 @@
+[
+  {
+    "model":"Week 10 Baseline",
+    "accuracy":0.8076923077,
+    "precision":0.9444444444,
+    "recall":0.6538461538,
+    "f1":0.7727272727,
+    "pairwise_accuracy":0.6153846154,
+    "strict_pairwise_accuracy":0.6153846154,
+    "num_pairs":26,
+    "num_pointwise_examples":52
+  },
+  {
+    "model":"Prompted Judge",
+    "accuracy":0.8846153846,
+    "precision":1.0,
+    "recall":0.7692307692,
+    "f1":0.8695652174,
+    "pairwise_accuracy":1.0,
+    "strict_pairwise_accuracy":0.7692307692,
+    "num_pairs":26,
+    "num_pointwise_examples":52
+  },
+  {
+    "model":"Fine-Tuned DPO Judge",
+    "accuracy":0.9615384615,
+    "precision":0.9615384615,
+    "recall":0.9615384615,
+    "f1":0.9615384615,
+    "pairwise_accuracy":0.9615384615,
+    "strict_pairwise_accuracy":0.9615384615,
+    "num_pairs":26,
+    "num_pointwise_examples":52
+  }
+]
