@@ -15,7 +15,8 @@ data:
   train_file: "data/training_data/preferences_train.jsonl"    # Path to the preference pair dataset that will be created.
   dev_file: "data/training_data/preferences_dev.jsonl"
   max_length: 2048                                            # Max token length that should accommodate prompt, chosen, and rejected responses.
-  
+  max_prompt_length: 1024
+
 training:
   # DPO-specific hyperparameters
   beta: 0.1                                                 # The regularisation parameter for DPO
@@ -33,6 +34,7 @@ output:
   model_dir: "models/judge"
   checkpoint_dir: "models/checkpoints"
   logging_dir: "reports/logs"
+  report_dir: "reports/training"
 
 reporting:
   use_wandb: false                                         # Set to false if not using Weights & Biases
