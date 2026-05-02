@@ -1,0 +1,127 @@
+{
+  "dataset": "Tenacious-Bench v0.1",
+  "project": "The Conversion Engine Ground Truth",
+  "created_by": "Nuhamin Alemayehu",
+  "date": "2026-05-02",
+  "status": "proxy_validation_completed_external_contamination_not_claimed",
+  "summary": {
+    "total_candidate_tasks": 436,
+    "total_selected_tasks": 260,
+    "train_tasks": 130,
+    "dev_tasks": 78,
+    "held_out_tasks": 52,
+    "train_pairs": 65,
+    "dev_pairs": 39,
+    "held_out_pairs": 26
+  },
+  "checks_completed": [
+    {
+      "check_name": "pair_integrity_by_split",
+      "status": "passed",
+      "details": {
+        "train": {
+          "total_pairs": 65,
+          "complete_pairs": 65,
+          "broken_pairs": 0
+        },
+        "dev": {
+          "total_pairs": 39,
+          "complete_pairs": 39,
+          "broken_pairs": 0
+        },
+        "held_out": {
+          "total_pairs": 26,
+          "complete_pairs": 26,
+          "broken_pairs": 0
+        }
+      }
+    },
+    {
+      "check_name": "label_balance_by_split",
+      "status": "passed",
+      "details": {
+        "train": {
+          "label_1_good": 65,
+          "label_0_bad": 65
+        },
+        "dev": {
+          "label_1_good": 39,
+          "label_0_bad": 39
+        },
+        "held_out": {
+          "label_1_good": 26,
+          "label_0_bad": 26
+        }
+      }
+    },
+    {
+      "check_name": "dpo_required_fields",
+      "status": "passed",
+      "details": {
+        "required_fields": [
+          "prompt",
+          "chosen",
+          "rejected"
+        ],
+        "train_dpo_missing_required_examples": [],
+        "dev_dpo_missing_required_examples": [],
+        "held_out_dpo_missing_required_examples": []
+      }
+    },
+    {
+      "check_name": "source_mode_coverage",
+      "status": "passed",
+      "details": {
+        "selected_source_modes": {
+          "trace-derived": 78,
+          "programmatic": 78,
+          "multi-LLM synthesis": 64,
+          "hand-authored adversarial": 40
+        }
+      }
+    },
+    {
+      "check_name": "held_out_is_separate_split",
+      "status": "passed",
+      "details": {
+        "held_out_tasks": 52,
+        "held_out_pairs": 26,
+        "use": "Final evaluation only"
+      }
+    }
+  ],
+  "checks_not_claimed": [
+    {
+      "check_name": "external_benchmark_overlap_scan",
+      "status": "not_completed",
+      "reason": "No full automated scan against external public benchmark corpora was performed for v0.1."
+    },
+    {
+      "check_name": "semantic_near_duplicate_scan",
+      "status": "not_completed",
+      "reason": "No embedding-based train/dev/held-out near-duplicate scan is claimed for v0.1."
+    },
+    {
+      "check_name": "web-scale contamination scan",
+      "status": "not_completed",
+      "reason": "The benchmark is project-specific and mostly generated from controlled sources, but no web-scale contamination scan is claimed."
+    }
+  ],
+  "risk_assessment": {
+    "overall_risk": "low_to_moderate_for_week11_submission",
+    "notes": [
+      "The split is pair-complete and label-balanced.",
+      "Held-out pairs are separate from DPO training pairs.",
+      "The dataset is small and domain-specific.",
+      "A stronger v0.2 release should add n-gram and embedding-based overlap checks."
+    ]
+  },
+  "recommended_v0_2_checks": [
+    "Exact pair_id and task_id overlap scan across splits",
+    "N-gram overlap scan between train/dev/held-out prompts",
+    "Embedding similarity scan for near-duplicate prompts and outputs",
+    "Manual review of top nearest-neighbor train/held-out examples",
+    "External benchmark overlap scan if publishing broadly",
+    "Secret-pattern scan for API keys, emails, and private customer data"
+  ]
+}
