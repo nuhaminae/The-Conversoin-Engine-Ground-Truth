@@ -11,11 +11,11 @@ Inputs:
   tenacious_bench/held_out/held_out.jsonl
 
 Outputs:
-  reports/evaluation/baseline_metrics.json
-  reports/evaluation/baseline_pointwise_scores.jsonl
-  reports/evaluation/baseline_pair_scores.jsonl
-  reports/evaluation/baseline_confusion_matrix.png
-  reports/evaluation/eval_baseline.log
+  reports/evaluation/baseline/baseline_metrics.json
+  reports/evaluation/baseline/baseline_pointwise_scores.jsonl
+  reports/evaluation/baseline/baseline_pair_scores.jsonl
+  reports/evaluation/baseline/baseline_confusion_matrix.png
+  reports/evaluation/baseline/eval_baseline.log
 """
 
 import argparse
