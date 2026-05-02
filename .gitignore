@@ -1,6 +1,25 @@
 # .gitignore
 
+# Secrets
 .venv
 .env
+.env.*
+*.key
+
+# Heavy/resumable training internals
+models/checkpoints/**/optimizer.pt
+models/checkpoints/**/scheduler.pt
+models/checkpoints/**/scaler.pt
+models/checkpoints/**/rng_state.pth
+models/checkpoints/**/training_args.bin
+models/checkpoints/**/adapter_model.safetensors
+models/checkpoints/**/tokenizer.json
+models/judge/adapter_model.safetensors
+models/judge/tokenizer.json
+
+# Optional local cache/log noise
+wandb/
+__pycache__/
+.ipynb_checkpoints/
+
 .vscode
-__pycache__
