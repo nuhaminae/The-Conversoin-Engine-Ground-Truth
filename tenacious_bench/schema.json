@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Tenacious-Bench v0.1 Task Schema",
+  "description": "Defines the structure for a single task in the Tenacious Benchmark, designed to be machine-verifiable.",
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "description": "A unique identifier for the benchmark task (e.g., 'TB-001-F2.3').",
+      "type": "string"
+    },
+    "task_type": {
+      "description": "The type of task being evaluated.",
+      "enum": ["GENERATE_REPLY", "GENERATE_COLD_OUTREACH"]
+    },
+    "difficulty": {
+      "description": "The estimated difficulty of the task.",
+      "enum": ["Easy", "Medium", "Hard", "Adversarial"]
+    },
+    "inputs": {
+      "description": "The data provided to the agent to perform the task.",
+      "type": "object",
+      "properties": {
+        "prospect_email": { "type": "string" },
+        "email_thread_history": { "type": "string" },
+        "enrichment_data": { "type": "object" },
+        "classified_intent": {
+           "enum": ["INTERESTED_BOOK_MEETING", "INTERESTED_QUESTION", "NOT_INTERESTED", "WRONG_PERSON", "UNSURE", null]
+        }
+      },
+      "required": ["prospect_email"]
+    },
+    "expected_output": {
+        "description": "A representation of the ideal output, used for scoring.",
+        "type": "object",
+        "properties": {
+          "json_valid": {
+            "description": "MUST the output be a valid JSON object with 'subject' and 'body' keys?",
+            "type": "boolean"
+          },
+          "body_contains": {
+            "description": "An array of substrings that MUST be present in the email body.",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "body_not_contains": {
+            "description": "An array of substrings that MUST NOT be present in the email body (for checking tone drift, etc.).",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "must_include_booking_link": {
+            "description": "MUST the email body contain the booking link?",
+            "type": "boolean"
+          }
+        },
+        "required": ["json_valid"]
+    },
+    "scoring_rubric": {
+        "description": "Defines how to calculate the final score based on the expected_output.",
+        "type": "object",
+        "properties": {
+            "score_breakdown": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "metric": {"type": "string"},
+                        "weight": {"type": "number"}
+                    }
+                }
+            }
+        }
+    }
+  },
+  "required": ["task_id", "task_type", "difficulty", "inputs", "expected_output", "scoring_rubric"]
+}
